@@ -1,7 +1,9 @@
 body {
   font-family: 'Roboto', sans-serif;
-  color:white;
   background: url('../img/bg.jpg') fixed center;
+}
+h1 {
+  color:white;
 }
 #container {
   width:75%;

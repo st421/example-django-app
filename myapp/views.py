@@ -14,12 +14,14 @@ def user_list(request):
     users = User.objects.all()
     return render(request, 'user_list.html', {'users':users})
 
-
 def add_user(request):
     if request.method == "POST":
         form = UserForm(request.POST)
-        user = form.save()
-        return render(request, 'user_thanks.html', {'user':user})
+        if form.is_valid():
+            user = form.save()
+            return render(request, 'user_thanks.html', {'user':user})
+        else:
+            return render(request, 'user_error.html', {})
     else:
         form = UserForm()
         return render(request, 'add_user.html', {'form':form})
