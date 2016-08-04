@@ -1,5 +1,7 @@
 body {
   font-family: 'Roboto', sans-serif;
+  color:white;
+  background-color:#0fb1ba;
 }
 #container {
   width:75%;
