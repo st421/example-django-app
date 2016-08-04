@@ -1,0 +1,14 @@
+<html>
+    <h1>Here are the users thus far:</h1>
+    <ul>
+      {% for user in users %}
+        <li>
+          {{ user }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <form method="POST" class="post-form" action="/user/new/">{% csrf_token %}{{ form.as_p }}
+      <input type="submit" value="Submit">
+    </form>
+</html>
