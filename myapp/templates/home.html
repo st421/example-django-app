@@ -2,7 +2,4 @@
 {% block content %}
     <h1>Welcome!</h1>
     <a href="{% url 'add_user' %}"><button type="button" class="btn btn-default">Sign up</button></a>
-    <form method="POST" class="post-form" action="/user/get/">{% csrf_token %}{{ form.as_p }}
-      <input type="submit" value="Submit">
-    </form>
 {% endblock %}
