@@ -1,7 +1,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   color:white;
-  background-color:#0fb1ba;
+  background: url('../img/bg.jpg') fixed center;
 }
 #container {
   width:75%;
