@@ -1,4 +1,12 @@
 {% extends 'main.html' %}
 {% block content %}
-    <h1>Thanks for signing up, {{user.first_name}}!</h1>
+    <h1>Welcome back, {{user.first_name}}!</h1>
+    <ul>Current tasks:
+      {% for task in tasks %}
+      <li>{{task}}</li>
+      {% endfor %}
+    </ul>
+    <form method="POST" class="post-form" action="/task/add/">{% csrf_token %}{{ form.as_p }}
+      <input type="submit" value="Add a task">
+    </form>
 {% endblock %}

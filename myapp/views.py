@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from .forms import UserSignupForm, UserLoginForm
+from .forms import UserSignupForm, UserLoginForm, TaskForm
 
 def home(request):
     return render(request, 'home.html', {})
@@ -27,7 +27,10 @@ def new_login(request):
 
 @login_required(login_url='login.html')
 def profile(request):
-    return render(request, 'profile.html', {'user':request.user})
+    form = TaskForm()
+    user = request.user
+    tasks = user.task_set.objects.all()
+    return render(request, 'profile.html', {'user':user, 'form':form, 'tasks':tasks})
 
 def signup(request):
     if request.method == "POST":
@@ -41,3 +44,12 @@ def signup(request):
     else:
         form = UserSignupForm()
         return render(request, 'signup.html', {'form':form})
+
+def add_task(request):
+    form = TaskForm(request.POST)
+    if form.is_valid():
+        task = form.save(commit=False)
+        task.user = request.user
+        task.save()
+        return profile(request)
+    # add error message about bad task
