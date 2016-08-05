@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name="home"),
-    url(r'^user/new/$', views.add_user, name="add_user"),
-    url(r'^user/get/$', views.get_user, name="get_user")
+    url(r'^profile$', views.profile, name="profile"),
+    url(r'^user/new/$', views.signup, name="signup"),
+    url(r'^user/get/$', views.user_login, name="login"),
 ]

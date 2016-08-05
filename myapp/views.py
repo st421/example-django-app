@@ -1,27 +1,43 @@
 from django.shortcuts import render
-from .models import User
-from .forms import UserForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from .forms import UserSignupForm, UserLoginForm
 
 def home(request):
     return render(request, 'home.html', {})
 
-def get_user(request):
-    user_name = "Susan"
-    u = User.objects.get(pk=user_name)
-    return render(request, 'user_thanks.html', {'user':u})
-
-def user_list(request):
-    users = User.objects.all()
-    return render(request, 'user_list.html', {'users':users})
-
-def add_user(request):
+def user_login(request):
     if request.method == "POST":
-        form = UserForm(request.POST)
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return render(request, 'profile.html', {'user':user})
+            else:
+                return new_login(request)
+    else:
+        return new_login(request)
+
+def new_login(request):
+    form = UserLoginForm()
+    return render(request, 'login.html', {'form':form})
+
+@login_required(login_url='login.html')
+def profile(request):
+    return render(request, 'profile.html', {'user':request.user})
+
+def signup(request):
+    if request.method == "POST":
+        form = UserSignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return render(request, 'user_thanks.html', {'user':user})
+            return render(request, 'profile.html', {'user':user})
         else:
-            return render(request, 'user_error.html', {})
+            form = UserSignupForm()
+            return render(request, 'signup.html', {'form':form})
     else:
-        form = UserForm()
-        return render(request, 'add_user.html', {'form':form})
+        form = UserSignupForm()
+        return render(request, 'signup.html', {'form':form})
