@@ -6,7 +6,7 @@
       <li>{{task}}</li>
       {% endfor %}
     </ul>
-    <form method="POST" class="post-form" action="/task/add/">{% csrf_token %}{{ form.as_p }}
+    <form method="POST" class="post-form" action="/task/new/">{% csrf_token %}{{ form.as_p }}
       <input type="submit" value="Add a task">
     </form>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
 from .forms import UserSignupForm, UserLoginForm, TaskForm
 
 def home(request):
@@ -45,11 +46,11 @@ def signup(request):
         form = UserSignupForm()
         return render(request, 'signup.html', {'form':form})
 
-def add_task(request):
+def new_task(request):
     form = TaskForm(request.POST)
     if form.is_valid():
         task = form.save(commit=False)
         task.user = request.user
         task.save()
-        return profile(request)
+        return render(request, '404.html', {})
     # add error message about bad task
