@@ -1,9 +1,9 @@
 {% extends 'main.html' %}
 {% block content %}
-    <h1>Welcome back, {{user.first_name}}!</h1>
+    <h1>Welcome back, {{user.username}}!</h1>
     <ul>Current tasks:
       {% for task in tasks %}
-      <li>{{task}}</li>
+      <li>{{task.name}}</li>
       {% endfor %}
     </ul>
     <form method="POST" class="post-form" action="/task/new/">{% csrf_token %}{{ form.as_p }}

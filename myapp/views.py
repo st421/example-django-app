@@ -16,21 +16,23 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request, 'profile.html', {'user':user})
+                return profile(request)
             else:
-                return new_login(request)
+                #add invalid password message
+                return new_login(request, form)
+        else:
+            return new_login(request, form)
     else:
-        return new_login(request)
+        return new_login(request, UserLoginForm())
 
-def new_login(request):
-    form = UserLoginForm()
+def new_login(request, form):
     return render(request, 'login.html', {'form':form})
 
 @login_required(login_url='login.html')
 def profile(request):
     form = TaskForm()
     user = request.user
-    tasks = user.task_set.objects.all()
+    tasks = user.task_set.all()
     return render(request, 'profile.html', {'user':user, 'form':form, 'tasks':tasks})
 
 def signup(request):
@@ -38,9 +40,8 @@ def signup(request):
         form = UserSignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return render(request, 'profile.html', {'user':user})
+            return profile(request)
         else:
-            form = UserSignupForm()
             return render(request, 'signup.html', {'form':form})
     else:
         form = UserSignupForm()
@@ -52,5 +53,7 @@ def new_task(request):
         task = form.save(commit=False)
         task.user = request.user
         task.save()
+        return profile(request)
+    else:
         return render(request, '404.html', {})
     # add error message about bad task
