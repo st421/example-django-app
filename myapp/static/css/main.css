@@ -1,6 +1,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   background: url('../img/bg.jpg') fixed center;
+  font-size:16px;
 }
 h1 {
   color:white;
@@ -8,4 +9,14 @@ h1 {
 #container {
   width:75%;
   margin:auto;
+}
+.btn-default {
+  margin-top:7px;
+}
+.navbar-header, h2 {
+  font-weight:bold;
+  font-size:26px;
+}
+.right {
+  float:right;
 }
