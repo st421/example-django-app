@@ -1,14 +1,19 @@
 {% extends 'main.html' %}
 {% block content %}
-  <h2>{{user.username}}'s current tasks:</h2>
+  <h2>{{user.username}}'s tasks:</h2>
+  <p>Points: {{points}}</p>
+    <!-- <form action="/task/rm/" class="post-form" method="POST">
+      {% csrf_token %}{{ rm_form.as_p }}
+      <input type="submit" value="Remove" class="btn btn-default">
+    </form> -->
     <ul>
-      {% for task in tasks %}
-        <li>{{task.name}}</li>
-      {% endfor %}
+    {% for task in tasks %}
+      <li>{{task.name}}</li>
+    {% endfor %}
     </ul>
     <form method="POST" class="post-form" action="/task/new/">
       <h2>Add a task</h2>
-      {% csrf_token %}{{ form.as_p }}
+      {% csrf_token %}{{ add_form.as_p }}
       <input type="submit" value="Add" class="btn btn-default">
     </form>
 {% endblock %}

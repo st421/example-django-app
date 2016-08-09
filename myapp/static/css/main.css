@@ -9,6 +9,7 @@ h1 {
 #container {
   width:75%;
   margin:auto;
+  padding:20px;
 }
 .btn-default {
   margin-top:7px;
