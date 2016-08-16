@@ -10,6 +10,13 @@ class Task(models.Model):
     name = models.CharField(max_length=30, unique=True)
     user = models.ForeignKey(User, null=True)
 
+    def get_absolute_url(self):
+        return 'bogus'
+
+class Clothing(models.Model):
+    img_src = models.CharField(max_length=30, unique=True)
+    user = models.ForeignKey(User, null=True)
+
 def create_profile(sender, **kwargs):
     user = kwargs["instance"]
     if kwargs["created"]:

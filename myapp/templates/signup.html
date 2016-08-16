@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block content %}
     <h1>User sign up</h1>
-    <form method="POST" class="post-form" action="/user/new/">
+    <form method="POST" class="post-form" action="/user/new">
       <div class="form-group">
       {% csrf_token %}{{ form.as_p }}
       <input type="submit" value="Submit" class="btn btn-default">
