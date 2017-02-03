@@ -1,23 +1,29 @@
 body {
-  font-family: 'Roboto', sans-serif;
-  background: url('../img/bg.jpg') fixed center;
+  font-family:'Roboto',sans-serif;
   font-size:16px;
 }
-h1 {
-  color:white;
-}
-#container {
-  width:75%;
-  margin:auto;
-  padding:20px;
-}
-.btn-default {
-  margin-top:7px;
-}
-.navbar-header, h2 {
+h2 {
   font-weight:bold;
   font-size:26px;
 }
-.right {
-  float:right;
+.container-fluid {
+  width:80%;
+}
+.navbar {
+  color:#FFF;
+  background-color:#e6002e;
+}
+.navbar a {
+  color:#FFF;
+}
+.navbar-header {
+  font-weight:bold;
+  font-size:28px;
+}
+.nav > li > a:hover {
+  color:#000;
+}
+.btn {
+  font-family:'Roboto',sans-serif;
+  font-weight:bold;
 }

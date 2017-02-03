@@ -18,6 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include('myapp.urls')),
-    url(r'^wishlist/', include('wishlist.urls')),
+    url(r'', include('myapp.urls'))
 ]

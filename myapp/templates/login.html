@@ -1,8 +1,8 @@
-{% extends 'main.html' %}
+{% extends 'layout.html' %}
 {% block content %}
-    <h1>User login</h1>
-    <form method="POST" class="post-form" action="/user/get">
-      {% csrf_token %}{{ form.as_p }}
-      <input type="submit" value="Submit" class="btn btn-default">
-    </form>
+<h2>User login</h2>
+<form method="POST" class="post-form" action="{% url 'login' %}">
+  {% csrf_token %}{{ form.as_p }}
+  <input type="submit" value="Submit" class="btn btn-default">
+</form>
 {% endblock %}

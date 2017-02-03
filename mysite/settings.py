@@ -59,8 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp',
-    'wishlist'
+    'myapp'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -86,14 +85,11 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'wishlist.context_processors.wishlist_items',
+                'django.contrib.messages.context_processors.messages'
             ],
         },
     },
 ]
-
-WISHLIST_ITEM_MODEL = 'myapp.Task'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
