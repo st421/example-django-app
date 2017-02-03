@@ -1,15 +1,19 @@
 {% extends 'layout.html' %}
 {% block content %}
-  <h2>{{user.username}}'s tasks:</h2>
-  <p>Points: {{points}}</p>
-  <ul><p>Tasks:</p>
+<h2>{{user.username}}'s tasks:</h2>
+<p>Points: {{points}}</p>
+<p>Tasks:
+<form method="POST" class="post-form" action="{% url 'finish_task' %}" >
+  {% csrf_token %}
   {% for task in tasks %}
-    <li>{{task.name}}</li>
+    <div class="checkbox"><label><input type="checkbox" name="task" value="{{task.id}}">{{task.name}}</label></div>
   {% endfor %}
-  </ul>
-  <form method="POST" class="post-form" action="/task/new">
-    <h2>Add a task</h2>
-    {% csrf_token %}{{ add_form.as_p }}
-    <input type="submit" value="Add" class="btn btn-default">
-  </form>
+  <input type="submit" value="Submit">
+</form>
+</p>
+<form method="POST" class="post-form" action="{% url 'new_task' %}">
+  <h2>Add a task</h2>
+  {% csrf_token %}{{ add_form.as_p }}
+  <input type="submit" value="Add" class="btn btn-default">
+</form>
 {% endblock %}

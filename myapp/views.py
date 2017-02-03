@@ -79,8 +79,23 @@ def new_task(request):
     form = AddTaskForm(request.POST)
     if form.is_valid():
         task = form.save(commit=False)
-        task.user = request.user
+        user = request.user
+        task.user = user
         task.save()
+        user.userprofile.points = user.userprofile.points + 1
+        user.userprofile.save()
         return redirect('/profile')
     else:
         return render(request, '404.html', {})
+
+def finish_task(request):
+    user = request.user
+    print request.POST
+    finished_tasks = request.POST.get("task", None)
+    for task_id in finished_tasks:
+        if task_id:
+            user.task_set.filter(id=task_id).delete()
+            if user.userprofile.points > 0:
+                user.userprofile.points = user.userprofile.points - 1
+    user.userprofile.save()
+    return redirect('/profile')
