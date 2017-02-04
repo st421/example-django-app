@@ -90,7 +90,6 @@ def new_task(request):
 
 def finish_task(request):
     user = request.user
-    print request.POST
     finished_tasks = request.POST.get("task", None)
     for task_id in finished_tasks:
         if task_id:
